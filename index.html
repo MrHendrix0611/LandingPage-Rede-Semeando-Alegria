@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Semeando Alegria</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/autismo.png">
+</head>
+<body>
+<audio id="bgMusic"></audio>
+<script>
+
+const music =
+    document.getElementById("bgMusic");
+
+const playlist = [
+    "audio/musica1.mp3",
+    "audio/musica2.mp3",
+    "audio/musica3.mp3"
+];
+
+const MAX_VOLUME = 0.15;
+
+let currentIndex =
+    Math.floor(
+        Math.random() *
+        playlist.length
+    );
+
+music.src =
+    playlist[currentIndex];
+
+music.volume =
+    MAX_VOLUME;
+
+let musicaIniciada = false;
+
+function iniciarMusica(){
+
+    if(musicaIniciada)
+        return;
+
+    musicaIniciada = true;
+
+    music.play()
+        .then(()=>{
+
+            console.log(
+                "Música iniciada"
+            );
+
+        })
+        .catch(err=>{
+
+            console.log(err);
+
+            musicaIniciada = false;
+
+        });
+
+}
+
+/* desktop */
+document.addEventListener(
+    "mousemove",
+    iniciarMusica
+);
+
+/* celular */
+document.addEventListener(
+    "touchmove",
+    iniciarMusica
+);
+
+/* caso o usuário volte para a aba */
+window.addEventListener(
+    "pageshow",
+    ()=>{
+
+        musicaIniciada = false;
+
+    }
+);
+
+/* ===========================
+   Troca de músicas
+=========================== */
+
+function trocarMusica(){
+
+    let volume =
+        music.volume;
+
+    const fadeOut =
+        setInterval(() => {
+
+            volume -= 0.02;
+
+            if(volume < 0)
+                volume = 0;
+
+            music.volume =
+                volume;
+
+            if(volume <= 0){
+
+                clearInterval(
+                    fadeOut
+                );
+
+                let novo;
+
+                do{
+
+                    novo =
+                        Math.floor(
+                            Math.random()
+                            * playlist.length
+                        );
+
+                }
+                while(
+                    novo === currentIndex
+                    &&
+                    playlist.length > 1
+                );
+
+                currentIndex =
+                    novo;
+
+                music.src =
+                    playlist[currentIndex];
+
+                music.play();
+
+                let fade = 0;
+
+                const fadeIn =
+                    setInterval(() => {
+
+                        fade += 0.02;
+
+                        if(
+                            fade >
+                            MAX_VOLUME
+                        ){
+                            fade =
+                                MAX_VOLUME;
+                        }
+
+                        music.volume =
+                            fade;
+
+                        if(
+                            fade >=
+                            MAX_VOLUME
+                        ){
+
+                            clearInterval(
+                                fadeIn
+                            );
+
+                        }
+
+                    },100);
+
+            }
+
+        },100);
+
+}
+
+music.addEventListener(
+    "ended",
+    trocarMusica
+);
+
+</script>
+  <button id="themeToggle" class="theme-toggle particle-effect">
+    <img src="img/autismo.png" alt="Alterar tema">
+  </button>
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+
+  <div class="container">
+
+    <div class="profile">
+
+        <div class="avatar-wrapper">
+            <img src="img/perfil.png"
+                alt="Rede Semeando Alegria"
+                class="avatar particle-effect"
+                id="avatar">
+        </div>
+
+
+        <h1>Rede Semeando Alegria</h1>
+
+        <p class="subtitle">
+            Semeando alegria, cultivando relações
+            e transformando vidas.
+        </p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>10+</strong>
+                <span>Anos</span>
+            </div>
+
+            <div class="stat">
+                <strong>120+</strong>
+                <span>Voluntários</span>
+            </div>
+
+            <div class="stat">
+                <strong>2800+</strong>
+                <span>Impactados</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="links">
+
+        <a href="about.html" class="link-button particle-effect">
+            💜 Conheça Nossa História
+        </a>
+
+        <a href="about.html#parceiros" class="link-button particle-effect">
+            🎭 Nossos Parceiros
+        </a>
+
+        <a href="about.html#impacto" class="link-button particle-effect">
+            📈 Nosso Impacto
+        </a>
+
+        <a href="about.html#voluntario" class="link-button destaque particle-effect">
+            🤝 Seja Voluntário
+        </a>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHQyijplv60xAP6WMdjHgkzHDfloQNHRchF6oCF-Y-V4etnw/viewform" target="_blank" class="link-button">
+            📩 Entre em Contato
+        </a>
+
+    </div>
+
+    <footer>
+
+        <div class="social-icons">
+
+            <a href="https://www.instagram.com/redesemeandoalegriaoficial/" target="_blank" class="particle-effect">
+                <img src="img/instagram.png">
+            </a>
+
+            <a href="https://www.facebook.com/Redesemeandoalegria/" target="_blank" class="particle-effect">
+                <img src="img/facebook.png">
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=6miZd2vj2Sk" target="_blank" class="particle-effect">
+                <img src="img/youtube.png">
+            </a>
+
+        </div>
+
+    </footer>
+
+  </div>
+
+    <script>
+
+    const avatar=document.getElementById("avatar");
+    const colors = [
+        "#FFD600",
+        "#6B46FF",
+        "#FF4F7B",
+        "#A7D46F",
+        "#FFFFFF"
+    ];
+
+    document.querySelectorAll(".particle-effect").forEach(element => {
+
+        element.addEventListener("mousemove", e => {
+
+            const rect = element.getBoundingClientRect();
+
+            for(let i=0;i<3;i++){
+
+                const p = document.createElement("span");
+
+                p.className = "particle";
+
+                p.style.background =
+                    colors[Math.floor(Math.random()*colors.length)];
+
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                p.style.left = x + "px";
+                p.style.top = y + "px";
+
+                p.style.setProperty(
+                    "--x",
+                    (Math.random()*140-70)+"px"
+                );
+
+                p.style.setProperty(
+                    "--y",
+                    (Math.random()*140-70)+"px"
+                );
+
+                const target =
+                    element.classList.contains("avatar")
+                        ? element.parentElement
+                        : element;
+
+                target.appendChild(p);
+
+                setTimeout(()=>{
+                    p.remove();
+                },900);
+
+            }
+
+        });
+
+    });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rede Semeando Alegria</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+<audio id="bgMusic"></audio>
+<script>
+
+const music =
+    document.getElementById("bgMusic");
+
+const playlist = [
+    "audio/musica1.mp3",
+    "audio/musica2.mp3"
+];
+
+const MAX_VOLUME = 0.15;
+
+let currentIndex =
+    Math.floor(
+        Math.random() *
+        playlist.length
+    );
+
+music.src =
+    playlist[currentIndex];
+
+music.volume =
+    MAX_VOLUME;
+
+let musicaIniciada = false;
+
+function iniciarMusica(){
+
+    if(musicaIniciada)
+        return;
+
+    musicaIniciada = true;
+
+    music.play()
+        .then(()=>{
+
+            console.log(
+                "Música iniciada"
+            );
+
+        })
+        .catch(err=>{
+
+            console.log(err);
+
+            musicaIniciada = false;
+
+        });
+
+}
+
+/* desktop */
+document.addEventListener(
+    "mousemove",
+    iniciarMusica
+);
+
+/* celular */
+document.addEventListener(
+    "touchmove",
+    iniciarMusica
+);
+
+/* caso o usuário volte para a aba */
+window.addEventListener(
+    "pageshow",
+    ()=>{
+
+        musicaIniciada = false;
+
+    }
+);
+
+/* ===========================
+   Troca de músicas
+=========================== */
+
+function trocarMusica(){
+
+    let volume =
+        music.volume;
+
+    const fadeOut =
+        setInterval(() => {
+
+            volume -= 0.02;
+
+            if(volume < 0)
+                volume = 0;
+
+            music.volume =
+                volume;
+
+            if(volume <= 0){
+
+                clearInterval(
+                    fadeOut
+                );
+
+                let novo;
+
+                do{
+
+                    novo =
+                        Math.floor(
+                            Math.random()
+                            * playlist.length
+                        );
+
+                }
+                while(
+                    novo === currentIndex
+                    &&
+                    playlist.length > 1
+                );
+
+                currentIndex =
+                    novo;
+
+                music.src =
+                    playlist[currentIndex];
+
+                music.play();
+
+                let fade = 0;
+
+                const fadeIn =
+                    setInterval(() => {
+
+                        fade += 0.02;
+
+                        if(
+                            fade >
+                            MAX_VOLUME
+                        ){
+                            fade =
+                                MAX_VOLUME;
+                        }
+
+                        music.volume =
+                            fade;
+
+                        if(
+                            fade >=
+                            MAX_VOLUME
+                        ){
+
+                            clearInterval(
+                                fadeIn
+                            );
+
+                        }
+
+                    },100);
+
+            }
+
+        },100);
+
+}
+
+music.addEventListener(
+    "ended",
+    trocarMusica
+);
+
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold particle-effect" href="index.html">Rede Semeando Alegria</a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item particle-effect"><a class="nav-link" href="#sobre">Sobre</a></li>
+                <li class="nav-item particle-effect"><a class="nav-link" href="#impacto">Impacto</a></li>
+                <li class="nav-item particle-effect"><a class="nav-link" href="#risoterapia">Risoterapia</a></li>
+                <li class="nav-item particle-effect"><a class="nav-link" href="#parceiros">Parceiros</a></li>
+                <li class="nav-item particle-effect"><a class="nav-link" href="#galeria">Galeria</a></li>
+                <li class="nav-item particle-effect"><a class="nav-link" href="#voluntario">Voluntário</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="overlay"></div>
+
+        <div class="container hero-content text-center" data-aos="zoom-in">
+
+            <h1>Semeando alegria,<br>cultivando relações<br>e transformando vidas.</h1>
+
+            <p class="lead my-4">
+            Levando amor, acolhimento e esperança através da risoterapia.
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-2"></div>
+
+            <a href="#voluntario" class="btn btn-amarelo particle-effect">
+            Quero ser voluntário
+            </a>
+
+            <a href="#sobre" class="btn btn-outline-light particle-effect">
+            Conheça a Rede
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+<section id="sobre" class="section">
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6" data-aos="fade-right">
+                <img src="img/06.png" class="img-fluid w-100 rounded-4 shadow-lg">
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+
+                <h2>Sobre a Rede</h2>
+
+                <p>
+                    A Rede Semeando Alegria iniciou suas atividades em
+                    2015, quando foi fundada por Dário Teixeira, que tinha
+                    como principal propósito levar bem estar e alegria a
+                    crianças que precisassem. Dário conheceu e estudou a
+                    Risoterapia, o que fortaleceu muito seus pensamentos e
+                    ideais. As poucos, a ideia foi crescendo e ganhando
+                    forma, com ajuda de pessoas muito especiais.
+                    Atualmente a Rede conta com uma equipe de
+                    voluntários que visita mensalmente Casas de Repouso e
+                    Casas de Apoio a crianças em tratamento contra o
+                    câncer, esse contato é o que traz sentido a todo amor
+                    depositado no projeto.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-5 gx-4 gy-4">
+
+            <div class="col-12 col-md-4">
+                <div class="info-card particle-effect mvv-1" data-aos="fade-up">
+                    <h3>Missão</h3>
+                    <p>Semear alegria e transformar vidas.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="info-card particle-effect mvv-2" data-aos="fade-up" data-aos-delay="150">
+                    <h3>Visão</h3>
+                    <p>Ser referência nacional em ações sociais.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="info-card particle-effect mvv-3" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Valores</h3>
+                    <p>Empatia, amor, respeito, alegria e compromisso.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="impacto" class="impact-section">
+    <div class="container">
+
+        <h2 class="text-center mb-5" data-aos="fade-up">Nosso Impacto</h2>
+
+        <div class="row text-center g-4">
+
+            <div class="col-6 col-md-3" data-aos="fade-up"><div class="impact-card particle-effect"><h3 class="counter" data-target="11">+10</h3><p>Anos</p></div></div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="150"><div class="impact-card particle-effect"><h3 class="counter" data-target="120">+120</h3><p>Voluntários</p></div></div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="250"><div class="impact-card particle-effect"><h3 class="counter" data-target="2800">+2800</h3><p>Vidas Impactadas</p></div></div>
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="350"><div class="impact-card particle-effect"><h3 class="counter" data-target="4">4</h3><p>Parceiros</p></div></div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="risoterapia" class="section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6" data-aos="fade-up">
+
+                <h2>O que é Risoterapia?</h2>
+
+                <p>
+                    Acreditamos que o riso é uma poderosa
+                    ferramenta de acolhimento.
+                </p>
+
+    
+
+                <p>
+                    De acordo com o autor do livro
+                    A Terapia do Riso,
+                    Eduardo Lambert, a alegria e o riso
+                    ajudam na resposta aos tratamentos
+                    e os mecanismos naturais de autocura.
+                </p>
+
+                <p style="margin-top: 20px;">
+                    "O riso treme, vibra nosso corpo e nos relaxa dando uma
+                    sensação de bem-estar. Ele ativa em nosso cérebro a
+                    produção de substâncias químicas que nos protegem
+                    contra acidentes vasculares cerebrais, estresse,
+                    problemas cardíacos e até depressão", afirma o médico.
+                    Quanto maior a intensidade da risada, maior será a
+                    produção dos neurotransmissores importantes para a
+                    saúde como as endorfinas e as serotoninas, que são
+                    antidepressivas.
+                </p>
+
+            </div>
+
+            <div class="col-lg-6 particle-effect" data-aos="zoom-in">
+
+                <img
+                    src="img/card.png"
+                    class="img-fluid w-100 rounded-4 shadow-lg">
+
+            </div>
+
+            
+            <div class="col-lg-6 particle-effect" data-aos="zoom-in">
+                <img
+                    src="img/card2.png"
+                    class="img-fluid w-100 rounded-4 shadow-lg">
+            </div>
+
+
+            <div class="col-lg-6" data-aos="fade-up">
+                <p>
+                    A psicopedagoga Rumilda Fernandes afirma que "o
+                    processo de cura depende da predisposição do paciente
+                    e da decisão de se curar”. A risoterapia pode ser
+                    aplicada por um terapeuta do riso que já tenha
+                    participado de grupos, estude o método e conheça a
+                    prática.
+    
+                    Ao gargalhar, o indivíduo trabalha quase todos os
+                    músculos do rosto e do abdômen, promove maior
+                    oxigenação do cérebro, estimula a liberação da
+                    endorfina (substância que ameniza a dor e promove o
+                    prazer). A risada tem ainda efeito anestésico e aumenta
+                    a imunidade do organismo. Por isso, pesquisas
+                    realizadas nos EUA comprovaram que ela acelera o
+                    processo de cura e diminui o tempo de internações.
+                </p>
+            </div>
+
+            
+            <h2 style="text-align: center;" data-aos="fade-up">Beneficios Risoterapia</h2>
+            <ul>
+                <li data-aos="fade-up">Melhora o estado emocional e reduz o estresse;</li>
+                <li data-aos="fade-up" data-aos-delay="50">Auxilia no tratamento da depressão;</li>
+                <li data-aos="fade-up" data-aos-delay="100">Diminui a dor através da redução dos níveis de
+                    cortisol e o aumento da produção de endorfina;</li>
+                <li data-aos="fade-up" data-aos-delay="150">Fortalece o sistema imunológico;</li>
+                <li data-aos="fade-up" data-aos-delay="200">Contribui para o rejuvenescimento;</li>
+                <li data-aos="fade-up" data-aos-delay="250">Aumenta as habilidades intelectuais estimulando a
+                    concentração e exercitando o cérebro;</li>
+                <li data-aos="fade-up" data-aos-delay="300">Beneficia o coração, já que o fluxo sanguíneo
+                    aumenta, auxiliando no controle da pressão arterial.</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="parceiros" class="section">
+    <div class="container">
+
+        <h2 class="text-center mb-5" data-aos="fade-up">Parceiros</h2>
+
+        <div class="parceiros-gallery">
+
+            <div class="parceiro-card" data-aos="fade-up">
+                <img class="img-fluid" src="img/casas.jfif" alt="CAVD">
+
+                <div class="parceiro-overlay">
+                    <h4>CAVD</h4>
+                </div>
+            </div>
+
+            <div class="parceiro-card" data-aos="fade-up" data-aos-delay="150">
+                <img class="img-fluid" src="img/casas2.jfif" alt="Instituto Luz do Amanhã">
+
+                <div class="parceiro-overlay">
+                    <h4>Instituto Luz do Amanhã</h4>
+                </div>
+            </div>
+
+            <div class="parceiro-card" data-aos="fade-up" data-aos-delay="250">
+                <img class="img-fluid" src="img/casas.jfif">
+
+                <div class="parceiro-overlay">
+                    <h4>Casa Ninho</h4>
+                </div>
+            </div>
+
+            <div class="parceiro-card" data-aos="fade-up" data-aos-delay="350">
+                <img class="img-fluid" src="img/casas2.jfif">
+
+                <div class="parceiro-overlay">
+                    <h4>Recanto Feliz</h4>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="show7" class="section">
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6 particle-effect" data-aos="fade-right">
+                <img
+                    src="img/show7.png"
+                    class="img-fluid w-100 rounded-4 shadow-lg"
+                    alt=""
+                >
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-left">
+
+                <h2 style="color:#FF4F7B" class="particle-effect">Assista o Show 7 no Youtube</h2>
+
+                <p>
+                    <b style="color: #6B46FF">Show 7: Labirinto do Amor, da Rede Semeando Alegria</b>, é uma live que promove uma reflexão 
+                    sobre os desafios, sentimentos e escolhas presentes nos relacionamentos humanos. Por meio 
+                    de dinâmicas e mensagens inspiradoras, o encontro convida o público a compreender o amor 
+                    como um caminho de crescimento, empatia e superação. A transmissão destaca a importância do diálogo, 
+                    do respeito e da valorização das pessoas que fazem parte de nossa vida. Além disso, incentiva os participantes 
+                    a enxergarem o amor como uma força capaz de transformar realidades e fortalecer os laços comunitários. 
+                    A live reforça a missão da Rede Semeando Alegria de levar esperança, acolhimento e valores humanos por meio de suas ações sociais e educativas.
+                </p>
+                <a style="background-color: #FF4F7B;" href="//www.youtube.com/watch?v=6miZd2vj2Sk&t=1092s" target="_blank" class="btn btn-dark btn-lg particle-effect">Assistir no Youtube <i class="bi bi-youtube"></i></a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="galeria" class="section">
+    <div class="container">
+        <h2 class="text-center mb-5" data-aos="fade-up">Galeria</h2>
+        <div class="gallery">
+            <img class="img-fluid" loading="lazy" src="img/galeria1.jpeg" data-aos="fade-up">
+            <img class="img-fluid" loading="lazy" src="img/galeria7.jpeg" data-aos="fade-up" data-aos-delay="150">
+            <img class="img-fluid" loading="lazy" src="img/galeria5.jpeg" data-aos="fade-up" data-aos-delay="250">
+            <img class="img-fluid" loading="lazy" src="img/galeria6.jpeg" data-aos="fade-up" data-aos-delay="350">
+            <img class="img-fluid" loading="lazy" src="img/galeria9.jpeg" data-aos="fade-up" data-aos-delay="450">
+            <img class="img-fluid" loading="lazy" src="img/galeria15.jpeg" data-aos="fade-up" data-aos-delay="550">
+            <img class="img-fluid" loading="lazy" src="img/galeria10.jpeg" data-aos="fade-up" data-aos-delay="650">
+            <img class="img-fluid" loading="lazy" src="img/galeria16.jpeg" data-aos="fade-up" data-aos-delay="750">
+        </div>
+    </div>
+</section>
+
+
+<section id="voluntario" class="volunteer-section">
+    <div class="container text-center" data-aos="zoom-in">
+        <h2>Faça parte dessa história</h2>
+        <p>Ajude a espalhar alegria.</p>
+        <a href="manual_voluntario.pdf" target="_blank" class="btn btn-dark btn-lg particle-effect">Quero ser voluntário</a>
+    </div>
+</section>
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+    
+            <div class="footer-column">
+
+                <img
+                    src="img/perfil.png"
+                    class="footer-logo">
+
+                <p>
+                    Há mais de 11 anos levando alegria,
+                    acolhimento e esperança através
+                    da risoterapia.
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Links</h4>
+
+                <ul>
+
+                    <li><a href="#sobre" class="particle-effect">Sobre</a></li>
+                    <li><a href="#impacto" class="particle-effect">Impacto</a></li>
+                    <li><a href="#parceiros" class="particle-effect">Parceiros</a></li>
+                    <li><a href="#voluntario" class="particle-effect">Voluntário</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Contato</h4>
+
+                <a>📍 São Paulo - SP</a>
+                <br>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHQyijplv60xAP6WMdjHgkzHDfloQNHRchF6oCF-Y-V4etnw/viewform" target="_blank" class="link-button particle-effect">
+                    📩 Entre em Contato
+                </a>
+
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Redes Sociais</h4>
+
+                <div class="footer-social">
+
+                    <a href="https://www.instagram.com/redesemeandoalegriaoficial/" target="_blank" class="particle-effect">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/Redesemeandoalegria/" target="_blank" class="particle-effect">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/watch?v=6miZd2vj2Sk&ab_channel=RedeSemeandoAlegria" target="_blank" class="particle-effect">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Rede Semeando Alegria.
+                Todos os direitos reservados.
+            </p>
+
+            <p>
+                Desenvolvido com 💜 para transformar vidas.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({duration:900,once:true,easing:'ease-out-cubic'});
+</script>
+<script>
+
+
+const colors = [
+
+    "#FFD600",
+
+    "#6B46FF",
+
+    "#FF4F7B",
+
+    "#A7D46F",
+
+    "#FFFFFF"
+
+];
+
+
+
+document.querySelectorAll(".particle-effect")
+.forEach(element => {
+
+
+
+    element.addEventListener("mousemove", e => {
+
+
+
+        const rect = element.getBoundingClientRect();
+
+
+
+        for(let i = 0; i < 3; i++){
+
+
+
+            const particle = document.createElement("span");
+
+
+
+            particle.className = "particle";
+
+
+
+            particle.style.background =
+
+                colors[
+                    Math.floor(
+                        Math.random()*colors.length
+                    )
+                ];
+
+
+
+            const x = e.clientX - rect.left;
+
+            const y = e.clientY - rect.top;
+
+
+
+            particle.style.left = x + "px";
+
+            particle.style.top = y + "px";
+
+
+
+            particle.style.setProperty(
+
+                "--x",
+
+                (Math.random()*140-70)+"px"
+
+            );
+
+
+
+            particle.style.setProperty(
+
+                "--y",
+
+                (Math.random()*140-70)+"px"
+
+            );
+
+
+
+            element.appendChild(particle);
+
+
+
+            setTimeout(()=>{
+
+                particle.remove();
+
+            },900);
+
+
+
+        }
+
+
+
+    });
+
+
+
+});
+
+
+</script>
+</script>
+</body>
+</html>
