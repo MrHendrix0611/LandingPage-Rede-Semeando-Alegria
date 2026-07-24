@@ -272,41 +272,6 @@ ou utilize uma extensão como **Live Server** no VS Code.
 
 ---
 
-# 📸 Screenshots
-
-Você pode adicionar posteriormente uma pasta:
-
-```text
-docs/
-│
-├── home.png
-├── sobre.png
-├── impacto.png
-├── parceiros.png
-├── galeria.png
-└── footer.png
-```
-
-Depois basta inserir:
-
-```markdown
-## 📸 Screenshots
-
-### Home
-
-![Home](docs/home.png)
-
-### Sobre
-
-![Sobre](docs/sobre.png)
-
-### Galeria
-
-![Galeria](docs/galeria.png)
-```
-
----
-
 # 🔮 Melhorias Futuras
 
 - Painel Administrativo
