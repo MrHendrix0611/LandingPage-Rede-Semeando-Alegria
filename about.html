@@ -11,6 +11,103 @@
 <link rel="stylesheet" href="css/about.css">
 <link rel="icon" href="img/icone.png">
 </head>
+<div class="modal fade"
+     id="voluntarioModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content voluntario-modal">
+
+            <div class="modal-header border-0">
+
+                <h4 class="modal-title fw-bold">
+                    Faça parte da Rede 💜
+                </h4>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p class="text-center mb-4">
+                    Escolha com quem deseja conversar.
+                </p>
+
+                <!-- Jessica -->
+
+                <div class="contato-card">
+
+                    <div class="contato-info">
+
+                        <img
+                            src="img/jessica.jpeg"
+                            alt="Jéssica"
+                            class="contato-foto">
+
+                        <div>
+
+                            <h5>Jéssica</h5>
+
+                        </div>
+
+                    </div>
+
+                    <a
+                        href="https://wa.me/5511985710372"
+                        target="_blank"
+                        class="btn btn-success">
+
+                        <i class="bi bi-whatsapp"></i>
+                        Conversar
+
+                    </a>
+
+                </div>
+
+                <!-- Dario -->
+
+                <div class="contato-card">
+
+                    <div class="contato-info">
+
+                        <img
+                            src="img/dario.jpeg"
+                            alt="Dário"
+                            class="contato-foto">
+
+                        <div>
+
+                            <h5>Dário</h5>
+
+                        </div>
+
+                    </div>
+
+                    <a
+                        href="https://wa.me/551198306721"
+                        target="_blank"
+                        class="btn btn-success">
+
+                        <i class="bi bi-whatsapp"></i>
+                        Conversar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 <body>
 
 <audio id="bgMusic"></audio>
@@ -498,9 +595,32 @@ music.addEventListener(
 
 <section id="voluntario" class="volunteer-section">
     <div class="container text-center" data-aos="zoom-in">
+
         <h2>Faça parte dessa história</h2>
+
         <p>Ajude a espalhar alegria.</p>
-        <a href="manual_voluntario.pdf" target="_blank" class="btn btn-dark btn-lg particle-effect">Quero ser voluntário</a>
+
+        <div class="volunteer-actions">
+
+            <button
+                class="btn btn-dark btn-lg particle-effect"
+                data-bs-toggle="modal"
+                data-bs-target="#voluntarioModal">
+
+                Quero ser voluntário
+
+            </button>
+
+            <a href="manual_voluntario.pdf"
+               target="_blank"
+               class="manual particle-effect">
+
+                Baixe o manual do voluntário
+
+            </a>
+
+        </div>
+
     </div>
 </section>
 
